@@ -1,6 +1,5 @@
 from calendar import c
 from django.shortcuts import redirect, render, HttpResponse
-from flask import render_template
 from . forms import *
 from django.contrib.auth import logout
 # Create your views here.
