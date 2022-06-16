@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Your Blogs{% endblock title %}
+{% block styleSheet %}{% endblock styleSheet %}
+{% block body %}
+
+<div class="container mx-5 my-5 pt-5">
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th scope="col">S No.</th>
+                <th scope="col">Blog Title</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% comment %} rendering blog name {% endcomment %}
+            {% for blog in blog_objs %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{blog.title}}</td>
+                <td>{{blog.created_at}}</td>
+                <td>
+                    <a href="{% url 'blog_update' blog.slug %}" class="btn btn-success">Update</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Delete
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Delete Your Blog</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close" style="border: none; background-color:white;"><span aria-hidden="true">&cross;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    Your Blog will be deleted permanently. After that you will not be able to fetch it again.
+                                </div>
+                                <div class="modal-footer">
+                                    
+                                    <a href="{% url 'blog_delete' blog.id %}" class="btn btn-danger">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock body %}
+{% block javascript %}<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>{% endblock javascript %}
